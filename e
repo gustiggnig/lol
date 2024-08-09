@@ -6,7 +6,7 @@ local character = player.Character or player.CharacterAdded:Wait()
 local humanoid = character:WaitForChild("Humanoid")
 
 local normalWalkSpeed = 16 -- Default walking speed
-local fastWalkSpeed = 32   -- Fast walking speed
+local fastWalkSpeed = 99   -- Fast walking speed
 local isFastWalking = false
 
 -- Function to toggle walking speed
