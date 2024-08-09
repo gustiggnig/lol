@@ -1,0 +1,30 @@
+local player = game.Players.LocalPlayer
+local mouse = player:GetMouse()
+local camera = game.Workspace.CurrentCamera
+
+local isHoldingRightClick = false
+local head = player.Character and player.Character:FindFirstChild("Head")
+
+-- Function to update camera position
+local function updateCamera()
+    if isHoldingRightClick and head then
+        camera.CameraType = Enum.CameraType.Scriptable
+        camera.CFrame = head.CFrame * CFrame.new(0, 1.5, 0) -- Adjust the offset as needed
+    else
+        camera.CameraType = Enum.CameraType.Custom
+    end
+end
+
+-- Connect mouse button events
+mouse.Button2Down:Connect(function()
+    isHoldingRightClick = true
+    updateCamera()
+end)
+
+mouse.Button2Up:Connect(function()
+    isHoldingRightClick = false
+    updateCamera()
+end)
+
+-- Update camera continuously when right-click is held
+game:GetService("RunService").RenderStepped:Connect(updateCamera)
