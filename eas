@@ -1,0 +1,23 @@
+local player = game.Players.LocalPlayer
+local character = player.Character or player.CharacterAdded:Wait()
+
+local function onChatted(message)
+    local args = message:split(" ")
+
+    if args[1] == "!size" and args[2] == "me" then
+        local scale = tonumber(args[3])
+
+        if scale then
+            for _, part in pairs(character:GetChildren()) do
+                if part:IsA("BasePart") then
+                    part.Size = part.Size * scale
+                elseif part:IsA("Humanoid") then
+                    part.BodyDepthScale.Value = scale
+                    part.BodyHeightScale.Value = scale
+                    part.BodyWidthScale.Value = scale
+                    part.HeadScale.Value = scale
+                end
+            end
+        end
+    end
+end
